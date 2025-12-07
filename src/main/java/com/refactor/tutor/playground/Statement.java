@@ -21,14 +21,9 @@ public class Statement {
 
             Play play = perf.playId();
 
-            // calculate volume credits
-            volumeCredits += Math.max(perf.audience() - 30, 0);
-            if ("comedy".equalsIgnoreCase(play.getType())) {
-                volumeCredits += Math.floor(perf.audience() / 5);
-            }
-
-            // print line for this order
             BigDecimal thisAmount = amountFor(perf);
+
+            volumeCredits += volumeCredits(perf);
 
             result += "  " + play.getName() + ": " + String.format(format, thisAmount.divide(BigDecimal.valueOf(100))) + " (" + perf.audience() + " seats)\n";
             totalAmount = totalAmount.add(thisAmount);
@@ -63,6 +58,22 @@ public class Statement {
                 result = result.add(BigDecimal.valueOf(300L * performance.audience()));
             }
             default -> throw new IllegalArgumentException("unknown type: " + play.getType());
+        }
+
+        return result;
+
+    }
+
+    int volumeCredits (Performance performance) {
+
+        int result = 0;
+
+        Play play = performance.playId();
+
+        // calculate volume credits
+        result += Math.max(performance.audience() - 30, 0);
+        if ("comedy".equalsIgnoreCase(play.getType())) {
+            result += Math.floor(performance.audience() / 5);
         }
 
         return result;
