@@ -1,7 +1,5 @@
 package com.refactor.tutor.playground;
 
-import com.refactor.tutor.model.Play;
-
 import java.math.BigDecimal;
 
 public class Invoice {
@@ -28,9 +26,7 @@ public class Invoice {
         String format = "$%,.2f";
 
         for (Performance perf : performances) {
-            Play play = perf.getPlay();
-            BigDecimal thisAmount = perf.amount();
-            result += "  " + play.getName() + ": " + String.format(format, thisAmount.divide(BigDecimal.valueOf(100))) + " (" + perf.getAudience() + " seats)\n";
+            result += "  " + perf.getPlay().getName() + ": " + String.format(format, perf.amount().divide(BigDecimal.valueOf(100))) + " (" + perf.getAudience() + " seats)\n";
         }
 
         result += "Amount owed is " + String.format(format, totalAmount().divide(BigDecimal.valueOf(100))) + "\n";

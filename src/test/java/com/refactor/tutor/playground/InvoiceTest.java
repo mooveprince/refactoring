@@ -1,6 +1,6 @@
 package com.refactor.tutor.playground;
 
-import com.refactor.tutor.model.Play;
+import com.refactor.tutor.model.PlayType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,9 +10,9 @@ class InvoiceTest {
     @Test
     void createStatement(){
         Performance[] performances = {
-                new Performance(Play.HAMLET, 55),
-                new Performance(Play.AS_LIKE, 35),
-                new Performance(Play.OTHELLO, 40)
+                new Performance(new Play("Hamlet", PlayType.TRAGEDY), 55),
+                new Performance(new Play("As You Like It", PlayType.COMEDY), 35),
+                new Performance(new Play("Othello", PlayType.TRAGEDY), 40)
         };
         Invoice invoice = new Invoice("BigCo", performances);
 

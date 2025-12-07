@@ -1,7 +1,5 @@
 package com.refactor.tutor.playground;
 
-import com.refactor.tutor.model.Play;
-
 import java.math.BigDecimal;
 
 public class Performance {
@@ -25,7 +23,7 @@ public class Performance {
 
         BigDecimal result;
 
-        switch (play.getType().toLowerCase()) {
+        switch (play.getType().toString().toLowerCase()) {
             case "tragedy" -> {
                 result = BigDecimal.valueOf(40000);
                 if (audience > 30) {
@@ -52,7 +50,7 @@ public class Performance {
 
         // calculate volume credits
         result += Math.max(audience - 30, 0);
-        if ("comedy".equalsIgnoreCase(play.getType())) {
+        if ("comedy".equalsIgnoreCase(play.getType().toString())) {
             result += Math.floor(audience / 5);
         }
 
