@@ -24,28 +24,36 @@ public class Invoice {
 
     public String createStatement() {
 
-        BigDecimal totalAmount = BigDecimal.ZERO;
-        int volumeCredits = 0;
-
         String result = "Statement for " + customer + "\n";
         String format = "$%,.2f";
 
         for (Performance perf : performances) {
-
             Play play = perf.getPlay();
-
             BigDecimal thisAmount = perf.amount();
-
-            volumeCredits += perf.volumeCredits();
-
             result += "  " + play.getName() + ": " + String.format(format, thisAmount.divide(BigDecimal.valueOf(100))) + " (" + perf.getAudience() + " seats)\n";
-            totalAmount = totalAmount.add(thisAmount);
         }
 
-        result += "Amount owed is " + String.format(format, totalAmount.divide(BigDecimal.valueOf(100))) + "\n";
-        result += "You earned " + volumeCredits + " credits\n";
+        result += "Amount owed is " + String.format(format, totalAmount().divide(BigDecimal.valueOf(100))) + "\n";
+        result += "You earned " + totalVolumeCredits() + " credits\n";
 
         return result;
+    }
+
+
+    private BigDecimal totalAmount() {
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (Performance perf : performances) {
+            totalAmount = totalAmount.add(perf.amount());
+        }
+        return totalAmount;
+    }
+
+    private int totalVolumeCredits() {
+        int totalVolumeCredits = 0;
+        for (Performance perf : performances) {
+            totalVolumeCredits += perf.volumeCredits();
+        }
+        return totalVolumeCredits;
     }
 
 }
