@@ -1,19 +1,14 @@
 package com.refactor.tutor.playground;
 
-import com.refactor.tutor.model.Invoice;
-import com.refactor.tutor.model.Performance;
 import com.refactor.tutor.model.Play;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StatementTest {
-
+class InvoiceTest {
 
     @Test
-    void createStatementData() {
-        Statement statement = new Statement();
-
+    void createStatement(){
         Performance[] performances = {
                 new Performance(Play.HAMLET, 55),
                 new Performance(Play.AS_LIKE, 35),
@@ -29,8 +24,7 @@ class StatementTest {
                 "Amount owed is $1,730.00\n" +
                 "You earned 47 credits\n";
 
-        String actualStatement =
-                statement.createStatementData(invoice);
+        String actualStatement = invoice.createStatement();
 
         assertEquals(expectedStatement, actualStatement);
     }
