@@ -4,10 +4,10 @@ import com.refactor.tutor.model.PlayType;
 
 import java.math.BigDecimal;
 
-public class Play {
+public abstract class Play {
 
-    String name;
-    PlayType playType;
+    private final String name;
+    private final PlayType playType;
 
     public Play(String name, PlayType playType) {
         this.name = name;
@@ -21,41 +21,12 @@ public class Play {
         return playType;
     }
 
-    public BigDecimal amount(int audience) {
-
-        BigDecimal result;
-
-        switch (playType.toString().toLowerCase()) {
-            case "tragedy" -> {
-                result = BigDecimal.valueOf(40000);
-                if (audience > 30) {
-                    result = result.add(BigDecimal.valueOf(1000L * (audience - 30)));
-                }
-            }
-            case "comedy" -> {
-                result = BigDecimal.valueOf(30000);
-                if (audience > 20) {
-                    result = result.add(BigDecimal.valueOf(10000L + 500L * (audience - 20)));
-                }
-                result = result.add(BigDecimal.valueOf(300L * audience));
-            }
-            default -> throw new IllegalArgumentException("unknown type: " + playType);
-        }
-
-        return result;
-
-    }
+    public abstract BigDecimal amount(int audience);
 
     public int volumeCredits(int audience) {
-        int result = 0;
-
-        // calculate volume credits
-        result += Math.max(audience - 30, 0);
-        if ("comedy".equalsIgnoreCase(playType.toString())) {
-            result += Math.floor(audience / 5);
-        }
-
-        return result;
+        // default volume credits (common part)
+        return Math.max(audience - 30, 0);
     }
+
 
 }

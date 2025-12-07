@@ -10,9 +10,9 @@ class InvoiceOriginalTest {
     @Test
     void createStatement(){
         Performance[] performances = {
-                new Performance(new Play("Hamlet", PlayType.TRAGEDY), 55),
-                new Performance(new Play("As You Like It", PlayType.COMEDY), 35),
-                new Performance(new Play("Othello", PlayType.TRAGEDY), 40)
+                new Performance(new TragedyPlay("Hamlet", PlayType.TRAGEDY), 55),
+                new Performance(new ComedyPlay("As You Like It", PlayType.COMEDY), 35),
+                new Performance(new TragedyPlay("Othello", PlayType.TRAGEDY), 40)
         };
         InvoiceOriginal invoice = new InvoiceOriginal("BigCo", performances);
 
