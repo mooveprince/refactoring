@@ -1,4 +1,4 @@
-package com.refactor.tutor.original;
+package com.refactor.tutor.playground;
 
 import com.refactor.tutor.model.Invoice;
 import com.refactor.tutor.model.Performance;
